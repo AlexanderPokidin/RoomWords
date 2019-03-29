@@ -8,7 +8,7 @@ import android.content.Context;
 import com.pokidin.a.roomwordssample.dao.WordDao;
 import com.pokidin.a.roomwordssample.entity.Word;
 
-@Database(entities = (Word.class), version = 1, exportSchema = false)
+@Database(entities = {Word.class}, version = 1, exportSchema = false)
 public abstract class WordRoomDatabase extends RoomDatabase {
 
     public abstract WordDao wordDao();
