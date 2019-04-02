@@ -25,6 +25,11 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
+    public static final int UPDATE_WORD_ACTIVITY_REQUEST_CODE = 2;
+
+    public static final String EXTRA_DATA_UPDATE_WORD = "extra_data_update_word";
+    public static final String EXTRA_DATA_ID = "extra_data_id";
+
     private WordViewModel mWordViewModel;
 
     @Override
@@ -68,6 +73,14 @@ public class MainActivity extends AppCompatActivity {
         });
         helper.attachToRecyclerView(recyclerView);
 
+        adapter.setOnItemClickListener(new WordListAdapter.ClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Word word = adapter.getWordAtPosition(position);
+                launchUpdateWordActivity(word);
+            }
+        });
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,8 +96,18 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            Word word = new Word(data.getStringExtra(NewWordActivity.REPLY));
+            Word word = new Word(data.getStringExtra(NewWordActivity.EXTRA_REPLY));
+            // Save the data to whe DB.
             mWordViewModel.insert(word);
+        } else if (requestCode == UPDATE_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            String wordData = data.getStringExtra(NewWordActivity.EXTRA_REPLY);
+            int id = data.getIntExtra(NewWordActivity.EXTRA_REPLY_ID, -1);
+
+            if (id != -1) {
+                mWordViewModel.updateWord(new Word(id, wordData));
+            } else {
+                Toast.makeText(this, R.string.unable_to_update, Toast.LENGTH_SHORT).show();
+            }
         } else {
             Toast.makeText(getApplicationContext(), R.string.empty_not_saved, Toast.LENGTH_LONG).show();
         }
@@ -111,5 +134,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void launchUpdateWordActivity(Word word) {
+        Intent intent = new Intent(this, NewWordActivity.class);
+        intent.putExtra(EXTRA_DATA_UPDATE_WORD, word.getWord());
+        intent.putExtra(EXTRA_DATA_ID, word.getId());
+        startActivityForResult(intent, UPDATE_WORD_ACTIVITY_REQUEST_CODE);
     }
 }

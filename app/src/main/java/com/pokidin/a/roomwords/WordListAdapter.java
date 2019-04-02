@@ -15,6 +15,7 @@ import java.util.List;
 public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordViewHolder> {
     private final LayoutInflater mInflater;
     private List<Word> mWords;
+    private static ClickListener sClickListener;
 
     WordListAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
@@ -62,6 +63,20 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
         public WordViewHolder(@NonNull View itemView) {
             super(itemView);
             wordItemView = itemView.findViewById(R.id.textView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    sClickListener.onItemClick(view, getAdapterPosition());
+                }
+            });
         }
+    }
+
+    public void setOnItemClickListener(ClickListener clickListener) {
+        WordListAdapter.sClickListener = clickListener;
+    }
+
+    public interface ClickListener {
+        void onItemClick(View view, int position);
     }
 }

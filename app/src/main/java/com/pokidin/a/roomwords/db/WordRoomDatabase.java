@@ -11,7 +11,7 @@ import android.support.annotation.NonNull;
 import com.pokidin.a.roomwords.dao.WordDao;
 import com.pokidin.a.roomwords.entity.Word;
 
-@Database(entities = {Word.class}, version = 1, exportSchema = false)
+@Database(entities = {Word.class}, version = 2, exportSchema = false)
 public abstract class WordRoomDatabase extends RoomDatabase {
 
     public abstract WordDao wordDao();

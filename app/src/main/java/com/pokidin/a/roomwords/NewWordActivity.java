@@ -9,7 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class NewWordActivity extends AppCompatActivity {
-    public static final String REPLY = "REPLY";
+    public static final String EXTRA_REPLY = "extra_replay";
+    public static final String EXTRA_REPLY_ID = "extra_replay_id";
 
     private EditText mEditWordView;
 
@@ -18,8 +19,23 @@ public class NewWordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_word);
         mEditWordView = findViewById(R.id.edit_word);
+        int id = -1;
+
+        final Bundle extras = getIntent().getExtras();
+
+        // If we are passed content, fill it in for the user to edit. Otherwise, start with empty fields.
+        if (extras != null) {
+            String word = extras.getString(MainActivity.EXTRA_DATA_UPDATE_WORD, "");
+            if (!word.isEmpty()) {
+                mEditWordView.setText(word);
+                mEditWordView.setSelection(word.length());
+                mEditWordView.requestFocus();
+            }
+        }
 
         final Button button = findViewById(R.id.button_save);
+
+        // When the user presses the Save button, create a new Intent for the reply.
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -28,7 +44,13 @@ public class NewWordActivity extends AppCompatActivity {
                     setResult(RESULT_CANCELED, replyIntent);
                 } else {
                     String word = mEditWordView.getText().toString();
-                    replyIntent.putExtra(REPLY, word);
+                    replyIntent.putExtra(EXTRA_REPLY, word);
+                    if (extras != null && extras.containsKey(MainActivity.EXTRA_DATA_ID)) {
+                        int id = extras.getInt(MainActivity.EXTRA_DATA_ID, -1);
+                        if (id != -1) {
+                            replyIntent.putExtra(EXTRA_REPLY_ID, id);
+                        }
+                    }
                     setResult(RESULT_OK, replyIntent);
                 }
                 finish();

@@ -6,6 +6,7 @@ import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
+import android.arch.persistence.room.Update;
 
 import com.pokidin.a.roomwords.entity.Word;
 
@@ -28,4 +29,7 @@ public interface WordDao {
 
     @Query("SELECT * from word_table LIMIT 1")
     Word[] getAnyWord();
+
+    @Update
+    void updateWord(Word word);
 }
