@@ -42,7 +42,11 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         final WordListAdapter adapter = new WordListAdapter(this);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+//        manager.setReverseLayout(true);
+//        manager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(manager);
 
         mWordViewModel = ViewModelProviders.of(this).get(WordViewModel.class);
         mWordViewModel.getAllWords().observe(this, new Observer<List<Word>>() {
@@ -132,7 +136,6 @@ public class MainActivity extends AppCompatActivity {
             mWordViewModel.deleteAll();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
