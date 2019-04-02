@@ -1,4 +1,4 @@
-package com.pokidin.a.roomwordssample;
+package com.pokidin.a.roomwords;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.pokidin.a.roomwordssample.entity.Word;
+import com.pokidin.a.roomwords.entity.Word;
 
 import java.util.List;
 
@@ -18,6 +18,10 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
 
     WordListAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
+    }
+
+    public Word getWordAtPosition(int position) {
+        return mWords.get(position);
     }
 
     @NonNull

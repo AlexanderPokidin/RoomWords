@@ -1,4 +1,4 @@
-package com.pokidin.a.roomwordssample;
+package com.pokidin.a.roomwords;
 
 import org.junit.Test;
 

@@ -1,12 +1,12 @@
-package com.pokidin.a.roomwordssample.repo;
+package com.pokidin.a.roomwords.repo;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
-import com.pokidin.a.roomwordssample.dao.WordDao;
-import com.pokidin.a.roomwordssample.db.WordRoomDatabase;
-import com.pokidin.a.roomwordssample.entity.Word;
+import com.pokidin.a.roomwords.dao.WordDao;
+import com.pokidin.a.roomwords.db.WordRoomDatabase;
+import com.pokidin.a.roomwords.entity.Word;
 
 import java.util.List;
 

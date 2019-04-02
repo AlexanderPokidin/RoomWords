@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.pokidin.a.roomwordssample">
+    package="com.pokidin.a.roomwords">
 
     <application
         android:allowBackup="true"
@@ -9,9 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NewWordActivity"></activity>
+        <activity android:name="com.pokidin.a.roomwords.NewWordActivity"></activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.pokidin.a.roomwords.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

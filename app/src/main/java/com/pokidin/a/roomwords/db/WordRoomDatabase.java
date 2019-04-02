@@ -1,4 +1,4 @@
-package com.pokidin.a.roomwordssample.db;
+package com.pokidin.a.roomwords.db;
 
 import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
@@ -8,8 +8,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
-import com.pokidin.a.roomwordssample.dao.WordDao;
-import com.pokidin.a.roomwordssample.entity.Word;
+import com.pokidin.a.roomwords.dao.WordDao;
+import com.pokidin.a.roomwords.entity.Word;
 
 @Database(entities = {Word.class}, version = 1, exportSchema = false)
 public abstract class WordRoomDatabase extends RoomDatabase {

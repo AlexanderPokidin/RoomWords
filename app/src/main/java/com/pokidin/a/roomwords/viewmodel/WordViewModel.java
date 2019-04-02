@@ -1,12 +1,12 @@
-package com.pokidin.a.roomwordssample.viewmodel;
+package com.pokidin.a.roomwords.viewmodel;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
-import com.pokidin.a.roomwordssample.entity.Word;
-import com.pokidin.a.roomwordssample.repo.WordRepository;
+import com.pokidin.a.roomwords.entity.Word;
+import com.pokidin.a.roomwords.repo.WordRepository;
 
 import java.util.List;
 

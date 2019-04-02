@@ -1,4 +1,4 @@
-package com.pokidin.a.roomwordssample.entity;
+package com.pokidin.a.roomwords.entity;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
