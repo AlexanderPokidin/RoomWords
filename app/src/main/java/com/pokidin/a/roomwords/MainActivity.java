@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String EXTRA_DATA_UPDATE_WORD = "extra_data_update_word";
     public static final String EXTRA_DATA_ID = "extra_data_id";
+    public static final String EXTRA_DATA_UPDATE_EXAMPLE = "extra_data_update_example";
+    public static final String EXTRA_DATA_UPDATE_TRANSLATE = "extra_data_update_translate";
 
     private WordViewModel mWordViewModel;
 
@@ -142,6 +144,8 @@ public class MainActivity extends AppCompatActivity {
     private void launchUpdateWordActivity(Word word) {
         Intent intent = new Intent(this, NewWordActivity.class);
         intent.putExtra(EXTRA_DATA_UPDATE_WORD, word.getWord());
+        intent.putExtra(EXTRA_DATA_UPDATE_EXAMPLE, word.getExample());
+        intent.putExtra(EXTRA_DATA_UPDATE_TRANSLATE, word.getTranslate());
         intent.putExtra(EXTRA_DATA_ID, word.getId());
         startActivityForResult(intent, UPDATE_WORD_ACTIVITY_REQUEST_CODE);
     }

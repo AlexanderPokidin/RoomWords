@@ -34,6 +34,9 @@ public class NewWordActivity extends AppCompatActivity {
                 mEditWordView.setText(word);
                 mEditWordView.setSelection(word.length());
                 mEditWordView.requestFocus();
+
+//                mEditExampleView.setText(extras.getString(MainActivity.EXTRA_DATA_UPDATE_EXAMPLE));
+//                mEditTranslateView.setText(extras.getString(MainActivity.EXTRA_DATA_UPDATE_TRANSLATE));
             }
         }
 

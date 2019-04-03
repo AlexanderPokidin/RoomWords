@@ -23,7 +23,7 @@ public class Word {
     @ColumnInfo(name = "example")
     String mExample;
 
-
+    @Ignore
     public Word(@NonNull String word) {
         mWord = word;
     }
