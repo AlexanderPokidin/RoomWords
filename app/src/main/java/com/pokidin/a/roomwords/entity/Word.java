@@ -16,8 +16,22 @@ public class Word {
     @ColumnInfo(name = "word")
     String mWord;
 
+    @ColumnInfo(name = "translate")
+    String mTranslate;
+
+
+    @ColumnInfo(name = "example")
+    String mExample;
+
+
     public Word(@NonNull String word) {
         mWord = word;
+    }
+
+    public Word(@NonNull String word, String translate, String example) {
+        mWord = word;
+        mTranslate = translate;
+        mExample = example;
     }
 
     @Ignore
@@ -36,5 +50,13 @@ public class Word {
 
     public void setId(int id) {
         mId = id;
+    }
+
+    public String getTranslate() {
+        return mTranslate;
+    }
+
+    public String getExample() {
+        return mExample;
     }
 }

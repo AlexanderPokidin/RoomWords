@@ -13,12 +13,16 @@ public class NewWordActivity extends AppCompatActivity {
     public static final String EXTRA_REPLY_ID = "extra_replay_id";
 
     private EditText mEditWordView;
+    private EditText mEditTranslateView;
+    private EditText mEditExampleView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_word);
         mEditWordView = findViewById(R.id.edit_word);
+        mEditExampleView = findViewById(R.id.edit_example);
+        mEditTranslateView = findViewById(R.id.edit_translate);
         int id = -1;
 
         final Bundle extras = getIntent().getExtras();

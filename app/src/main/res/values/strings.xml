@@ -7,4 +7,6 @@
     <string name="empty_not_saved">Word not saved because it is empty.</string>
     <string name="clear_all_data">Clear all data</string>
     <string name="unable_to_update">Unable to update the word</string>
+    <string name="hint_example">Example...</string>
+    <string name="hint_translate">Translate...</string>
 </resources>
