@@ -14,19 +14,14 @@ public class Word {
 
     @NonNull
     @ColumnInfo(name = "word")
-    String mWord;
+    private String mWord;
 
     @ColumnInfo(name = "translate")
-    String mTranslate;
+    private String mTranslate;
 
 
     @ColumnInfo(name = "example")
-    String mExample;
-
-    @Ignore
-    public Word(@NonNull String word) {
-        mWord = word;
-    }
+    private String mExample;
 
     public Word(@NonNull String word, String translate, String example) {
         mWord = word;
@@ -35,9 +30,16 @@ public class Word {
     }
 
     @Ignore
-    public Word(int id, @NonNull String word) {
+    public Word(@NonNull String word) {
+        mWord = word;
+    }
+
+    @Ignore
+    public Word(int id, @NonNull String word, String translate, String example) {
         mId = id;
         mWord = word;
+        mTranslate = translate;
+        mExample = example;
     }
 
     public String getWord() {

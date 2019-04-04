@@ -102,15 +102,20 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            Word word = new Word(data.getStringExtra(NewWordActivity.EXTRA_REPLY));
-            // Save the data to whe DB.
+            Word word = new Word(data.getStringExtra(NewWordActivity.EXTRA_REPLY_WORD),
+                    data.getStringExtra(NewWordActivity.EXTRA_REPLY_EXAMPLE),
+                    data.getStringExtra(NewWordActivity.EXTRA_REPLY_TRANSLATE));
+            // Save the new data to whe DB.
             mWordViewModel.insert(word);
         } else if (requestCode == UPDATE_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            String wordData = data.getStringExtra(NewWordActivity.EXTRA_REPLY);
+            String wordData = data.getStringExtra(NewWordActivity.EXTRA_REPLY_WORD);
+            String exampleData = data.getStringExtra(NewWordActivity.EXTRA_REPLY_EXAMPLE);
+            String translateData = data.getStringExtra(NewWordActivity.EXTRA_REPLY_TRANSLATE);
             int id = data.getIntExtra(NewWordActivity.EXTRA_REPLY_ID, -1);
 
             if (id != -1) {
-                mWordViewModel.updateWord(new Word(id, wordData));
+                // Update the data to whe DB.
+                mWordViewModel.updateWord(new Word(id, wordData, translateData, exampleData));
             } else {
                 Toast.makeText(this, R.string.unable_to_update, Toast.LENGTH_SHORT).show();
             }

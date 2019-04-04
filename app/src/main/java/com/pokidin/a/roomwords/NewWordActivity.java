@@ -9,7 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class NewWordActivity extends AppCompatActivity {
-    public static final String EXTRA_REPLY = "extra_replay";
+    public static final String EXTRA_REPLY_WORD = "extra_replay_word";
+    public static final String EXTRA_REPLY_EXAMPLE = "extra_replay_example";
+    public static final String EXTRA_REPLY_TRANSLATE = "extra_replay_translate";
     public static final String EXTRA_REPLY_ID = "extra_replay_id";
 
     private EditText mEditWordView;
@@ -35,8 +37,15 @@ public class NewWordActivity extends AppCompatActivity {
                 mEditWordView.setSelection(word.length());
                 mEditWordView.requestFocus();
 
-//                mEditExampleView.setText(extras.getString(MainActivity.EXTRA_DATA_UPDATE_EXAMPLE));
-//                mEditTranslateView.setText(extras.getString(MainActivity.EXTRA_DATA_UPDATE_TRANSLATE));
+                String example = extras.getString(MainActivity.EXTRA_DATA_UPDATE_EXAMPLE, "");
+                if (!example.isEmpty()) {
+                    mEditExampleView.setText(example);
+                }
+
+                String translate = extras.getString(MainActivity.EXTRA_DATA_UPDATE_TRANSLATE, "");
+                if (!translate.isEmpty()) {
+                    mEditTranslateView.setText(translate);
+                }
             }
         }
 
@@ -51,7 +60,12 @@ public class NewWordActivity extends AppCompatActivity {
                     setResult(RESULT_CANCELED, replyIntent);
                 } else {
                     String word = mEditWordView.getText().toString();
-                    replyIntent.putExtra(EXTRA_REPLY, word);
+                    String example = mEditExampleView.getText().toString();
+                    String translate = mEditTranslateView.getText().toString();
+
+                    replyIntent.putExtra(EXTRA_REPLY_WORD, word);
+                    replyIntent.putExtra(EXTRA_REPLY_EXAMPLE, example);
+                    replyIntent.putExtra(EXTRA_REPLY_TRANSLATE, translate);
                     if (extras != null && extras.containsKey(MainActivity.EXTRA_DATA_ID)) {
                         int id = extras.getInt(MainActivity.EXTRA_DATA_ID, -1);
                         if (id != -1) {
