@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String EXTRA_DATA_UPDATE_WORD = "extra_data_update_word";
     public static final String EXTRA_DATA_ID = "extra_data_id";
+    public static final String EXTRA_DATA_UPDATE_EXAMPLE = "extra_data_update_example";
+    public static final String EXTRA_DATA_UPDATE_TRANSLATE = "extra_data_update_translate";
 
     private WordViewModel mWordViewModel;
 
@@ -42,7 +44,11 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         final WordListAdapter adapter = new WordListAdapter(this);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+//        manager.setReverseLayout(true);
+//        manager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(manager);
 
         mWordViewModel = ViewModelProviders.of(this).get(WordViewModel.class);
         mWordViewModel.getAllWords().observe(this, new Observer<List<Word>>() {
@@ -96,15 +102,20 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            Word word = new Word(data.getStringExtra(NewWordActivity.EXTRA_REPLY));
-            // Save the data to whe DB.
+            Word word = new Word(data.getStringExtra(NewWordActivity.EXTRA_REPLY_WORD),
+                    data.getStringExtra(NewWordActivity.EXTRA_REPLY_EXAMPLE),
+                    data.getStringExtra(NewWordActivity.EXTRA_REPLY_TRANSLATE));
+            // Save the new data to whe DB.
             mWordViewModel.insert(word);
         } else if (requestCode == UPDATE_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            String wordData = data.getStringExtra(NewWordActivity.EXTRA_REPLY);
+            String wordData = data.getStringExtra(NewWordActivity.EXTRA_REPLY_WORD);
+            String exampleData = data.getStringExtra(NewWordActivity.EXTRA_REPLY_EXAMPLE);
+            String translateData = data.getStringExtra(NewWordActivity.EXTRA_REPLY_TRANSLATE);
             int id = data.getIntExtra(NewWordActivity.EXTRA_REPLY_ID, -1);
 
             if (id != -1) {
-                mWordViewModel.updateWord(new Word(id, wordData));
+                // Update the data to whe DB.
+                mWordViewModel.updateWord(new Word(id, wordData, translateData, exampleData));
             } else {
                 Toast.makeText(this, R.string.unable_to_update, Toast.LENGTH_SHORT).show();
             }
@@ -132,13 +143,14 @@ public class MainActivity extends AppCompatActivity {
             mWordViewModel.deleteAll();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
     private void launchUpdateWordActivity(Word word) {
         Intent intent = new Intent(this, NewWordActivity.class);
         intent.putExtra(EXTRA_DATA_UPDATE_WORD, word.getWord());
+        intent.putExtra(EXTRA_DATA_UPDATE_EXAMPLE, word.getExample());
+        intent.putExtra(EXTRA_DATA_UPDATE_TRANSLATE, word.getTranslate());
         intent.putExtra(EXTRA_DATA_ID, word.getId());
         startActivityForResult(intent, UPDATE_WORD_ACTIVITY_REQUEST_CODE);
     }

@@ -12,6 +12,18 @@
         android:hint="@string/hint_word"
         android:inputType="textAutoComplete" />
 
+    <EditText
+        android:id="@+id/edit_example"
+        style="@style/text_view_style"
+        android:hint="@string/hint_example"
+        android:inputType="textAutoComplete" />
+
+    <EditText
+        android:id="@+id/edit_translate"
+        style="@style/text_view_style"
+        android:hint="@string/hint_translate"
+        android:inputType="textAutoComplete" />
+
     <Button
         android:id="@+id/button_save"
         style="@style/button_style"
