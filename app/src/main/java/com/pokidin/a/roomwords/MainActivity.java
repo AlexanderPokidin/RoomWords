@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
                         mWordViewModel.deleteWord(myWord);
                         break;
                     case ItemTouchHelper.LEFT:
+                        // Launch word editing activity.
                         launchUpdateWordActivity(myWord);
                         break;
                 }
