@@ -71,10 +71,17 @@ public class MainActivity extends AppCompatActivity {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
                 Word myWord = adapter.getWordAtPosition(position);
-                Toast.makeText(MainActivity.this, "Deleting " + myWord.getWord(), Toast.LENGTH_LONG).show();
+                switch (direction) {
+                    case ItemTouchHelper.RIGHT:
+                        Toast.makeText(MainActivity.this, "Deleting " + myWord.getWord(), Toast.LENGTH_LONG).show();
 
-                // Delete the word
-                mWordViewModel.deleteWord(myWord);
+                        // Delete the word
+                        mWordViewModel.deleteWord(myWord);
+                        break;
+                    case ItemTouchHelper.LEFT:
+                        launchUpdateWordActivity(myWord);
+                        break;
+                }
             }
         });
         helper.attachToRecyclerView(recyclerView);
@@ -83,7 +90,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position) {
                 Word word = adapter.getWordAtPosition(position);
-                launchUpdateWordActivity(word);
+//                launchUpdateWordActivity(word);
+                launchShowWordActivity(word);
             }
         });
 
@@ -148,6 +156,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void launchUpdateWordActivity(Word word) {
         Intent intent = new Intent(this, NewWordActivity.class);
+        intent.putExtra(EXTRA_DATA_UPDATE_WORD, word.getWord());
+        intent.putExtra(EXTRA_DATA_UPDATE_EXAMPLE, word.getExample());
+        intent.putExtra(EXTRA_DATA_UPDATE_TRANSLATE, word.getTranslate());
+        intent.putExtra(EXTRA_DATA_ID, word.getId());
+        startActivityForResult(intent, UPDATE_WORD_ACTIVITY_REQUEST_CODE);
+    }
+
+    private void launchShowWordActivity(Word word) {
+        Intent intent = new Intent(this, ShowWordActivity.class);
         intent.putExtra(EXTRA_DATA_UPDATE_WORD, word.getWord());
         intent.putExtra(EXTRA_DATA_UPDATE_EXAMPLE, word.getExample());
         intent.putExtra(EXTRA_DATA_UPDATE_TRANSLATE, word.getTranslate());

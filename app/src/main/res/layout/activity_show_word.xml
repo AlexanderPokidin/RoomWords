@@ -8,7 +8,8 @@
 
     <TextView
         android:id="@+id/show_word"
-        style="@style/text_view_style" />
+        style="@style/text_view_style"
+        android:textSize="48sp" />
 
     <TextView
         android:id="@+id/show_example"
