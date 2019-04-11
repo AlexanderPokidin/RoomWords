@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
                         mWordViewModel.deleteWord(myWord);
                         break;
                     case ItemTouchHelper.LEFT:
+//                        TODO: При нажатии кнопки Back в RecyclerView не восстанавливается свичнутая строка
                         // Launch word editing activity.
                         launchUpdateWordActivity(myWord);
                         break;
