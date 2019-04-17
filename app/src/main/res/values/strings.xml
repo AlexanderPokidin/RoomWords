@@ -10,4 +10,5 @@
     <string name="hint_example">Example...</string>
     <string name="hint_translate">Translate...</string>
     <string name="show">Show</string>
+    <string name="edit_word">Edit word</string>
 </resources>
