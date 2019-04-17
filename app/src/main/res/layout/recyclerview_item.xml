@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/round_corner"
+        android:background="@drawable/button_background"
         android:contentDescription="@string/edit_word"
         android:src="@drawable/ic_edit_light_24dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView"
