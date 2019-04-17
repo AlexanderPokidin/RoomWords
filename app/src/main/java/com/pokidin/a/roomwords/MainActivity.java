@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
                     case ItemTouchHelper.LEFT:
                         // Launch word editing activity.
                         launchUpdateWordActivity(myWord);
+                        mWordViewModel.updateWord(myWord);
                         break;
                 }
             }
