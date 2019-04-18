@@ -46,8 +46,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         LinearLayoutManager manager = new LinearLayoutManager(this);
-//        manager.setReverseLayout(true);
-//        manager.setStackFromEnd(true);
         recyclerView.setLayoutManager(manager);
 
         mWordViewModel = ViewModelProviders.of(this).get(WordViewModel.class);
@@ -92,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position) {
                 Word word = adapter.getWordAtPosition(position);
-//                launchUpdateWordActivity(word);
                 launchShowWordActivity(word);
             }
         });

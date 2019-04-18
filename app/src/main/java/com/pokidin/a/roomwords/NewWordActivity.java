@@ -26,7 +26,6 @@ public class NewWordActivity extends AppCompatActivity {
         mEditWordView = findViewById(R.id.edit_word);
         mEditExampleView = findViewById(R.id.edit_example);
         mEditTranslateView = findViewById(R.id.edit_translate);
-        int id = -1;
 
         final Bundle extras = getIntent().getExtras();
 

@@ -19,7 +19,6 @@ public class ShowWordActivity extends AppCompatActivity {
         mShowWordView = findViewById(R.id.show_word);
         mShowExampleView = findViewById(R.id.show_example);
         mShowTranslateView = findViewById(R.id.show_translate);
-        int id = -1;
 
         final Bundle extras = getIntent().getExtras();
 

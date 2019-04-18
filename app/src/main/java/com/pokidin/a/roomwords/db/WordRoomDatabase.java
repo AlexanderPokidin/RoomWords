@@ -22,7 +22,7 @@ public abstract class WordRoomDatabase extends RoomDatabase {
         if (INSTANCE == null) {
             synchronized (WordRoomDatabase.class) {
                 if (INSTANCE == null) {
-                    // Create Database here
+                    // Create Database
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             WordRoomDatabase.class, "word_database")
                             // Wipes and rebuilds instead of migrating if no Migration object
@@ -45,9 +45,7 @@ public abstract class WordRoomDatabase extends RoomDatabase {
 
     private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
         private final WordDao mWordDao;
-        String[] words = {
-//                "dolphin", "crocodile", "cobra", "ostrich"
-        };
+        String[] words = {};
 
         PopulateDbAsyncTask(WordRoomDatabase db) {
             mWordDao = db.wordDao();
