@@ -46,8 +46,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         LinearLayoutManager manager = new LinearLayoutManager(this);
-//        manager.setReverseLayout(true);
-//        manager.setStackFromEnd(true);
         recyclerView.setLayoutManager(manager);
 
         mWordViewModel = ViewModelProviders.of(this).get(WordViewModel.class);
@@ -71,10 +69,19 @@ public class MainActivity extends AppCompatActivity {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
                 Word myWord = adapter.getWordAtPosition(position);
-                Toast.makeText(MainActivity.this, "Deleting " + myWord.getWord(), Toast.LENGTH_LONG).show();
+                switch (direction) {
+                    case ItemTouchHelper.RIGHT:
+                        Toast.makeText(MainActivity.this, "Deleting " + myWord.getWord(), Toast.LENGTH_LONG).show();
 
-                // Delete the word
-                mWordViewModel.deleteWord(myWord);
+                        // Delete the word
+                        mWordViewModel.deleteWord(myWord);
+                        break;
+                    case ItemTouchHelper.LEFT:
+                        // Launch word editing activity.
+                        launchUpdateWordActivity(myWord);
+                        mWordViewModel.updateWord(myWord);
+                        break;
+                }
             }
         });
         helper.attachToRecyclerView(recyclerView);
@@ -83,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position) {
                 Word word = adapter.getWordAtPosition(position);
-                launchUpdateWordActivity(word);
+                launchShowWordActivity(word);
             }
         });
 
@@ -119,8 +126,6 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, R.string.unable_to_update, Toast.LENGTH_SHORT).show();
             }
-        } else {
-            Toast.makeText(getApplicationContext(), R.string.empty_not_saved, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -148,6 +153,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void launchUpdateWordActivity(Word word) {
         Intent intent = new Intent(this, NewWordActivity.class);
+        intent.putExtra(EXTRA_DATA_UPDATE_WORD, word.getWord());
+        intent.putExtra(EXTRA_DATA_UPDATE_EXAMPLE, word.getExample());
+        intent.putExtra(EXTRA_DATA_UPDATE_TRANSLATE, word.getTranslate());
+        intent.putExtra(EXTRA_DATA_ID, word.getId());
+        startActivityForResult(intent, UPDATE_WORD_ACTIVITY_REQUEST_CODE);
+    }
+
+    private void launchShowWordActivity(Word word) {
+        Intent intent = new Intent(this, ShowWordActivity.class);
         intent.putExtra(EXTRA_DATA_UPDATE_WORD, word.getWord());
         intent.putExtra(EXTRA_DATA_UPDATE_EXAMPLE, word.getExample());
         intent.putExtra(EXTRA_DATA_UPDATE_TRANSLATE, word.getTranslate());

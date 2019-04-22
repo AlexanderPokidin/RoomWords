@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class NewWordActivity extends AppCompatActivity {
     public static final String EXTRA_REPLY_WORD = "extra_replay_word";
@@ -25,7 +26,6 @@ public class NewWordActivity extends AppCompatActivity {
         mEditWordView = findViewById(R.id.edit_word);
         mEditExampleView = findViewById(R.id.edit_example);
         mEditTranslateView = findViewById(R.id.edit_translate);
-        int id = -1;
 
         final Bundle extras = getIntent().getExtras();
 
@@ -58,6 +58,7 @@ public class NewWordActivity extends AppCompatActivity {
                 Intent replyIntent = new Intent();
                 if (TextUtils.isEmpty(mEditWordView.getText())) {
                     setResult(RESULT_CANCELED, replyIntent);
+                    Toast.makeText(getApplicationContext(), R.string.empty_not_saved, Toast.LENGTH_LONG).show();
                 } else {
                     String word = mEditWordView.getText().toString();
                     String example = mEditExampleView.getText().toString();
